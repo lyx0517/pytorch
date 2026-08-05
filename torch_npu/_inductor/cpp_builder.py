@@ -3,7 +3,6 @@ import sys
 import platform
 from typing import List, Tuple
 
-import torch
 import torch._inductor.cpp_builder as cpp_builder
 from torch.utils.cpp_extension import _TORCH_PATH
 
@@ -158,8 +157,8 @@ def _get_optimization_cflags(
         return cflags, ldflags
 
 
-def patch_get_cpp_torch_device_options():
-    torch._inductor.cpp_builder.get_cpp_torch_device_options = get_cpp_torch_device_options
+def register_npu_cpp_device_options():
+    cpp_builder.register_cpp_device_options("npu", get_cpp_torch_device_options)
 
 
 def patch_get_optimization_cflags():

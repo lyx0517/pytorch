@@ -91,8 +91,8 @@ def _load_triton_backend():
     from .codegen._sizevars import patch_simplify
     from .codegen.ir import patch_indexing, patch_loop_body
     from .cpp_builder import (
-        patch_get_cpp_torch_device_options,
         patch_get_optimization_cflags,
+        register_npu_cpp_device_options,
     )
     from .codegen.cpp_utils import patch_device_to_aten
     from .decomposition import _register_triton_decompositions
@@ -143,7 +143,7 @@ def _load_triton_backend():
 
     patch_get_cpp_wrapper_header()
     patch_aot_load()
-    patch_get_cpp_torch_device_options()
+    register_npu_cpp_device_options()
     patch_constant_fold_uniform_value()
     patch_device_to_aten()
 
