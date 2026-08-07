@@ -158,7 +158,10 @@ def _get_optimization_cflags(
 
 
 def register_npu_cpp_device_options():
-    cpp_builder.register_cpp_device_options("npu", get_cpp_torch_device_options)
+    if hasattr(cpp_builder, "register_cpp_device_options"):
+        cpp_builder.register_cpp_device_options("npu", get_cpp_torch_device_options)
+    else:
+        cpp_builder.get_cpp_torch_device_options = get_cpp_torch_device_options
 
 
 def patch_get_optimization_cflags():
